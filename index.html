@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>QRCode</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css" />
+    </head>
+    <body>
+        <div ng-app="SampleApp">
+            [<a ng-href="/#/scan">Scan</a>] [<a ng-href="/#/generate">Generate</a>]
+            <hr />
+
+            <div ng-view></div>
+        </div>
+
+        <script type="module" src="/src/main.ts"></script>
+    </body>
+</html>
