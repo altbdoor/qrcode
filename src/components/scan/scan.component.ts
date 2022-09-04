@@ -1,11 +1,11 @@
-import { BrowserQRCodeReader } from '@zxing/library';
+import { BrowserQRCodeReader } from '@zxing/library/esm/browser/BrowserQRCodeReader';
 import { element, IComponentController, IComponentOptions, IScope } from 'angular';
 import template from './scan.component.html?raw';
 
 class ScanController implements IComponentController {
     static $inject = ['$scope'];
 
-    reader = new BrowserQRCodeReader(1000);
+    reader: BrowserQRCodeReader | undefined;
     devices: MediaDeviceInfo[] = [];
     activeDevice = '';
 
@@ -15,21 +15,26 @@ class ScanController implements IComponentController {
     constructor(private $scope: IScope) {}
 
     $onInit() {
-        this.reader.listVideoInputDevices().then((devices) => {
-            this.devices = devices;
-            this.$scope.$apply();
-
-            if (devices.length === 1) {
-                this.activeDevice = devices[0].deviceId;
-                this.startScan(devices[0].deviceId);
+        import('@zxing/library/esm/browser/BrowserQRCodeReader')
+            .then((lib) => {
+                this.reader = new lib.BrowserQRCodeReader(1000);
+                return this.reader.listVideoInputDevices();
+            })
+            .then((devices) => {
+                this.devices = devices;
                 this.$scope.$apply();
-            }
-        });
+
+                if (devices.length === 1) {
+                    this.activeDevice = devices[0].deviceId;
+                    this.startScan(devices[0].deviceId);
+                    this.$scope.$apply();
+                }
+            });
     }
 
     startScan(deviceId: string) {
-        this.reader.stopContinuousDecode();
-        this.reader.decodeFromVideoDevice(deviceId, this.videoId, (res) => {
+        this.reader!.stopContinuousDecode();
+        this.reader!.decodeFromVideoDevice(deviceId, this.videoId, (res) => {
             if (!res) {
                 return;
             }
@@ -45,7 +50,7 @@ class ScanController implements IComponentController {
 
     stopScan() {
         const video = document.querySelector<HTMLVideoElement>(`#${this.videoId}`)!;
-        this.reader.stopContinuousDecode();
+        this.reader!.stopContinuousDecode();
         video.pause();
         video.currentTime = 0;
     }

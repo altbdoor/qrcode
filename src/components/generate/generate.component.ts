@@ -4,7 +4,11 @@ import template from './generate.component.html?raw';
 class GenerateController implements IComponentController {
     static $inject = [];
 
-    $onInit() {}
+    $onInit() {
+        import('@zxing/library/esm/browser/BrowserQRCodeSvgWriter').then((lib) => {
+            console.log(lib);
+        });
+    }
 }
 
 export class GenerateComponent implements IComponentOptions {
