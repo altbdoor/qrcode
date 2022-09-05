@@ -11,7 +11,9 @@
         <button type="button" ng-click="$ctrl.stopScan()">⏸</button>
     </div>
 
-    <video ng-attr-id="{{ $ctrl.videoId }}" class="app-scan__video"></video>
+    <p>
+        <video ng-attr-id="{{ $ctrl.videoId }}" class="app-scan__video"></video>
+    </p>
     <textarea class="app-scan__result" rows="4" readonly></textarea>
     <p>
         <small>Last updated: {{ $ctrl.lastUpdated | date: 'medium' }}</small>

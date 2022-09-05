@@ -15,11 +15,10 @@ class ScanController implements IComponentController {
     constructor(private $scope: IScope) {}
 
     $onInit() {
-        import('@zxing/library/esm/browser/BrowserQRCodeReader')
-            .then((lib) => {
-                this.reader = new lib.BrowserQRCodeReader(1000);
-                this.reloadDevices();
-            });
+        import('@zxing/library/esm/browser/BrowserQRCodeReader').then((lib) => {
+            this.reader = new lib.BrowserQRCodeReader(1000);
+            this.reloadDevices();
+        });
     }
 
     reloadDevices() {

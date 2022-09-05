@@ -1,1 +1,13 @@
-<div>Hello generate</div>
+<div class="app-gen">
+    <textarea
+        class="app-gen__text"
+        rows="4"
+        ng-change="$ctrl.textChange($ctrl.formModel)"
+        ng-model="$ctrl.formModel.inputText"
+        ng-model-options="{ debounce: 500 }"
+    ></textarea>
+
+    <p class="app-gen__container">
+        <img class="app-gen__container__img" ng-src="{{ $ctrl.blobUrl }}" />
+    </p>
+</div>
