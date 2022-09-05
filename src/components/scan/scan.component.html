@@ -1,11 +1,15 @@
 <div class="app-scan">
-    <select class="app-scan__devices" ng-model="$ctrl.activeDevice">
-        <option ng-repeat="dev in $ctrl.devices" ng-value="dev.deviceId">
-            {{ dev.label }}
-        </option>
-    </select>
-    <button type="button" class="app-scan__controls" ng-click="$ctrl.startScan($ctrl.activeDevice)">▶</button>
-    <button type="button" class="app-scan__controls" ng-click="$ctrl.stopScan()">⏸</button>
+    <div class="app-scan__controls">
+        <select ng-model="$ctrl.activeDevice">
+            <option value="">-- Devices --</option>
+            <option ng-repeat="dev in $ctrl.devices" ng-value="dev.deviceId">
+                {{ dev.label }}
+            </option>
+        </select>
+        <button type="button" ng-click="$ctrl.reloadDevices()">🔃</button>
+        <button type="button" ng-click="$ctrl.startScan($ctrl.activeDevice)">▶</button>
+        <button type="button" ng-click="$ctrl.stopScan()">⏸</button>
+    </div>
 
     <video ng-attr-id="{{ $ctrl.videoId }}" class="app-scan__video"></video>
     <textarea class="app-scan__result" rows="4" readonly></textarea>

@@ -18,18 +18,21 @@ class ScanController implements IComponentController {
         import('@zxing/library/esm/browser/BrowserQRCodeReader')
             .then((lib) => {
                 this.reader = new lib.BrowserQRCodeReader(1000);
-                return this.reader.listVideoInputDevices();
-            })
-            .then((devices) => {
-                this.devices = devices;
-                this.$scope.$apply();
-
-                if (devices.length === 1) {
-                    this.activeDevice = devices[0].deviceId;
-                    this.startScan(devices[0].deviceId);
-                    this.$scope.$apply();
-                }
+                this.reloadDevices();
             });
+    }
+
+    reloadDevices() {
+        this.reader!.listVideoInputDevices().then((devices) => {
+            this.devices = devices;
+            this.$scope.$apply();
+
+            if (devices.length === 1) {
+                this.activeDevice = devices[0].deviceId;
+                this.startScan(devices[0].deviceId);
+                this.$scope.$apply();
+            }
+        });
     }
 
     startScan(deviceId: string) {

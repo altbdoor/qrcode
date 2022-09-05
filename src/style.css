@@ -2,13 +2,16 @@
     padding: 0.5rem 0;
 }
 
-.app-scan__devices {
-    display: inline-block;
+.app-scan__controls {
+    display: flex;
 }
 
-.app-scan__controls {
+.app-scan__controls > button {
     padding-left: 10px;
     padding-right: 10px;
+}
+.app-scan__controls > button:last-child {
+    margin-right: 0;
 }
 
 .app-scan__video {
