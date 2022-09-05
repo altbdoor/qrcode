@@ -26,7 +26,7 @@ class ScanController implements IComponentController {
             this.devices = devices;
             this.$scope.$apply();
 
-            if (devices.length === 1) {
+            if (devices.length > 0) {
                 this.activeDevice = devices[0].deviceId;
                 this.startScan(devices[0].deviceId);
                 this.$scope.$apply();
