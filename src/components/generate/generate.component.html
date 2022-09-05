@@ -7,7 +7,36 @@
         ng-model-options="{ debounce: 500 }"
     ></textarea>
 
-    <p class="app-gen__container">
-        <img class="app-gen__container__img" ng-src="{{ $ctrl.blobUrl }}" />
+    <p>
+        <label>
+            <input
+                type="radio"
+                name="generate-mode"
+                value="image"
+                ng-model="$ctrl.formModel.mode"
+                ng-change="$ctrl.textChange($ctrl.formModel)"
+            />
+            Image
+        </label>
+        <label>
+            <input
+                type="radio"
+                name="generate-mode"
+                value="ascii"
+                ng-model="$ctrl.formModel.mode"
+                ng-change="$ctrl.textChange($ctrl.formModel)"
+            />
+            ASCII
+        </label>
     </p>
+
+    <p class="app-gen__img" ng-if="$ctrl.formModel.mode === 'image'">
+        <img class="app-gen__img__img" ng-src="{{ $ctrl.blobUrl }}" />
+    </p>
+    <div ng-if="$ctrl.formModel.mode === 'ascii'">
+        <p>
+            <textarea class="app-gen__ascii" rows="10" ng-model="$ctrl.qrText" readonly></textarea>
+        </p>
+        <button type="button" ng-click="$ctrl.copyText($ctrl.qrText)">Copy QR ASCII</button>
+    </div>
 </div>

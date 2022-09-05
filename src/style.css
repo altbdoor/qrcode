@@ -24,14 +24,18 @@
     border: 2px dashed var(--border);
 }
 
-.app-gen__container {
+.app-gen__img {
     text-align: center;
     border: 2px dashed var(--border);
 }
 
-.app-gen__container__img {
+.app-gen__img__img {
     display: block;
     margin: 0 auto;
     max-height: 80vh;
     object-fit: contain;
+}
+
+.app-gen__ascii {
+    font-family: monospace;
 }
