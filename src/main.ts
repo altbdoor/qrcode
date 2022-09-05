@@ -4,10 +4,13 @@ import { componentName as GenerateComponentName, GenerateComponent } from './com
 import { componentName as ScanComponentName, ScanComponent } from './components/scan/scan.component';
 import './style.css';
 
-module('SampleApp', [ngRoute])
+module('QrApp', [ngRoute])
     .component(ScanComponentName, new ScanComponent())
     .component(GenerateComponentName, new GenerateComponent())
-    .config(
+    .config([
+        '$routeProvider',
+        '$locationProvider',
+        '$compileProvider',
         (
             $routeProvider: route.IRouteProvider,
             $locationProvider: ILocationProvider,
@@ -22,6 +25,6 @@ module('SampleApp', [ngRoute])
             $compileProvider.debugInfoEnabled(false);
             $compileProvider.commentDirectivesEnabled(false);
             $compileProvider.cssClassDirectivesEnabled(false);
-        }
-    )
+        },
+    ])
     .run(() => {});
